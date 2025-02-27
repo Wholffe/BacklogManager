@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1064</width>
+    <height>801</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Backlog Manager</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QComboBox" name="combobox_category_filter"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineedit_category_filter"/>
+      </item>
+     </layout>
+    </item>
+    <item row="6" column="1">
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>383</width>
+         <height>660</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QComboBox" name="combobox_column_filter"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineedit_column_filter"/>
+      </item>
+     </layout>
+    </item>
+    <item row="6" column="0" rowspan="2">
+     <widget class="QTableWidget" name="backlog_collection_table">
+      <property name="minimumSize">
+       <size>
+        <width>650</width>
+        <height>300</height>
+       </size>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Art</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Bezeichnung</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Beschreibung</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Status in %</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>1</string>
+       </property>
+      </item>
+      <item row="0" column="1">
+       <property name="text">
+        <string>Serie</string>
+       </property>
+      </item>
+      <item row="0" column="2">
+       <property name="text">
+        <string>One Piece Gold</string>
+       </property>
+      </item>
+      <item row="0" column="3">
+       <property name="text">
+        <string>alles was passiert</string>
+       </property>
+      </item>
+      <item row="0" column="4">
+       <property name="text">
+        <string>100</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1064</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDatei">
+    <property name="title">
+     <string>Neu</string>
+    </property>
+    <addaction name="action_new_backlog"/>
+    <addaction name="action_new_category"/>
+   </widget>
+   <widget class="QMenu" name="menuMail">
+    <property name="title">
+     <string>Bearbeiten</string>
+    </property>
+    <addaction name="action_edit_backlog"/>
+   </widget>
+   <addaction name="menuDatei"/>
+   <addaction name="menuMail"/>
+  </widget>
+  <action name="actionMail_erfassen">
+   <property name="text">
+    <string>Mail erfassen</string>
+   </property>
+  </action>
+  <action name="actionMail_senden">
+   <property name="text">
+    <string>Mail senden</string>
+   </property>
+  </action>
+  <action name="actionMen_bericht_sortieren">
+   <property name="text">
+    <string>Menübericht sortieren</string>
+   </property>
+  </action>
+  <action name="action_new_backlog">
+   <property name="text">
+    <string>-Neuen Backlog hinzufügen</string>
+   </property>
+  </action>
+  <action name="action_new_category">
+   <property name="text">
+    <string>-Neue Kategorie anlegen</string>
+   </property>
+  </action>
+  <action name="action_edit_backlog">
+   <property name="text">
+    <string>-Datensatz bearbeiten</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
