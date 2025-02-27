@@ -1,6 +1,7 @@
 import sys
 from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QTableWidgetItem
+from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QTableWidgetItem, QLabel, QVBoxLayout, QScrollArea, QProgressBar
+import os
 
 from backlog_manager_edit_dialog import BacklogDialog
 from backlog_manager_add_cat import CategoryDialog
@@ -11,7 +12,7 @@ from config_handler import fetch_all_categories, fetch_backlogs_from_categories,
 class BacklogManager(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('templates/backlog_manager_main.ui', self)
+        uic.loadUi("templates/backlog_manager_main.ui", self)
         self.show()
 
         self.initialize_program_data()
@@ -54,8 +55,8 @@ class BacklogManager(QMainWindow):
         new_category = category_dialog.new_category_input.text()   # Neue Spiele
         new_category.lower().replace(" ", "_")                     # neue_spiele
 
-        with open('config/custom_categories.txt', 'a+') as file:
-            file.write(f'\n{new_category}')
+        with open("config/custom_categories.txt", "a+") as file:
+            file.write(f"\n{new_category}")
             self.categories.append(new_category)
 
 
@@ -72,7 +73,7 @@ class BacklogManager(QMainWindow):
 
     def populate_ui_element_data(self):
         self.combobox_category_filter.addItems(self.categories)
-        self.combobox_column_filter.addItems(['ID', 'Titel', 'Beschreibung', 'Status'])
+        self.combobox_column_filter.addItems(["ID", "Titel", "Beschreibung", "Status"])
 
         # initialize the table
         for category in self.categories:
@@ -83,6 +84,41 @@ class BacklogManager(QMainWindow):
         self.action_new_backlog.triggered.connect(self.add_new_backlog)
         self.action_new_category.triggered.connect(self.add_new_category)
         self.action_edit_backlog.triggered.connect(self.edit_backlog)
+        self.backlog_collection_table.cellClicked.connect(self.display_backlog_details)
+
+    def display_backlog_details(self, row, column):
+        self.backlog_collection_table.selectRow(row)
+        _title = self.backlog_collection_table.item(row, 1).text()
+        _category = str(self.combobox_category_filter.currentText())
+
+        backlog = self.fetch_backlog_by_title_and_category(_title, _category)
+        if backlog:
+            _progress = int(backlog[4])
+            _notes = backlog[5]
+
+            scroll_area = self.findChild(QScrollArea, "scrollArea")
+            scroll_area_widget = scroll_area.widget()
+            layout = QVBoxLayout(scroll_area_widget)
+
+            layout.addWidget(QLabel(f"Progress:"))
+            progress_bar = QProgressBar()
+            progress_bar.setValue(_progress)
+            layout.addWidget(progress_bar)
+            layout.addWidget(QLabel(f"Notes:\n {_notes}"))
+
+            scroll_area_widget.setLayout(layout)
+
+    def fetch_backlog_by_title_and_category(self, title, category) -> list:
+        path = f"config/{category}.txt"
+        if not os.path.exists(path):
+            return None
+
+        with open(path, "r") as file:
+            for line in file:
+                backlog = line.strip().split(";")
+                if backlog[0] == title:
+                    return backlog
+        return None
 
 
 app = QApplication(sys.argv)
