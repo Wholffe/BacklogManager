@@ -83,17 +83,17 @@
       </item>
       <item row="0" column="1">
        <property name="text">
-        <string>One Piece Gold</string>
+        <string>Star Wars: Episode III</string>
        </property>
       </item>
       <item row="0" column="2">
        <property name="text">
-        <string>alles was passiert</string>
+        <string>Die Rache der Sith</string>
        </property>
       </item>
       <item row="0" column="3">
        <property name="text">
-        <string>100</string>
+        <string>Erledigt</string>
        </property>
       </item>
      </widget>

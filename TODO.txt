@@ -1,0 +1,7 @@
+refresh beim anlegen von datensätzen
+bearbeiten von datensätzen
+custom categories entfernen --> übernimmt sowieso schon categories
+
+hilfe ui hinzufügen
+status_bar updaten
+font etc absprechen

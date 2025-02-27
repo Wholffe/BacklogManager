@@ -38,16 +38,14 @@ class BacklogManager(QMainWindow):
         self.status_bar.showMessage(f"Backlog {_name} wurde hinzugefügt.")
 
     def add_new_backlog_row(self, backlog):
-        _type, _name, _description, _status, _progress, _notes = backlog
+        _name, _type, _description, _status, _progress, _notes = backlog
 
         row_count = self.backlog_collection_table.rowCount()
         self.backlog_collection_table.insertRow(row_count)
         self.backlog_collection_table.setItem(row_count, 0, QTableWidgetItem(row_count))
-        self.backlog_collection_table.setItem(row_count, 1, QTableWidgetItem(_type))
-        self.backlog_collection_table.setItem(row_count, 2, QTableWidgetItem(_name))
-        self.backlog_collection_table.setItem(row_count, 3, QTableWidgetItem(_description))
-        self.backlog_collection_table.setItem(row_count, 4, QTableWidgetItem(_status))
-
+        self.backlog_collection_table.setItem(row_count, 1, QTableWidgetItem(_name))
+        self.backlog_collection_table.setItem(row_count, 2, QTableWidgetItem(_description))
+        self.backlog_collection_table.setItem(row_count, 3, QTableWidgetItem(_status))
 
     def add_new_category(self):
         category_dialog = CategoryDialog()
