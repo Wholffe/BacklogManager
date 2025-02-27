@@ -8,7 +8,7 @@ class BacklogDialog(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi('templates/backlog_manager_edit_dialog.ui',self)
-        self.input_type.addItems(fetch_all_categories())
+        self.input_category.addItems(fetch_all_categories())
         self.input_status.addItems(['Auf der Watchlist', 'Gerade dran', 'Erledigt'])
 
     def get_content(self):

@@ -4,7 +4,7 @@ import os
 def append_to_backlog_config(config_file, backlog):
     with open(f'config/{config_file}.txt', 'a+') as file:
         csv_string = ';'.join(backlog)
-        file.write(csv_string)
+        file.write(f'{csv_string}\n')
 
 def fetch_all_categories():
     predefined_categories = fetch_predefined_categories()

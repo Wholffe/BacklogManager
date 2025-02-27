@@ -27,7 +27,7 @@ class BacklogManager(QMainWindow):
         backlog_dialog.exec()
 
         _name = backlog_dialog.input_name.text()
-        _type = str(backlog_dialog.input_type.currentText())                   # category
+        _type = str(backlog_dialog.input_category.currentText())
         _description = str(backlog_dialog.input_description.text())
         _status = str(backlog_dialog.input_status.currentText())
         _progress = str(backlog_dialog.input_progress.value())    
@@ -35,7 +35,7 @@ class BacklogManager(QMainWindow):
 
         category_name = _type.lower().replace(" ", "_")
         append_to_backlog_config(category_name, [_name, _type, _description, _status, _progress, _notes])
-
+        self.status_bar.showMessage(f"Backlog {_name} wurde hinzugefügt.")
 
     def add_new_backlog_row(self, backlog):
         _type, _name, _description, _status, _progress, _notes = backlog

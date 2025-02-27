@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label_progress">
      <property name="text">
-      <string>Progress</string>
+      <string>Fortschritt in %</string>
      </property>
     </widget>
    </item>

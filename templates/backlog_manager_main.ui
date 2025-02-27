@@ -34,6 +34,13 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="2">
+       <widget class="QPushButton" name="button_apply_filter">
+        <property name="text">
+         <string>Filter Anwenden</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item row="7" column="0" rowspan="2">
@@ -102,7 +109,7 @@
          <x>0</x>
          <y>0</y>
          <width>342</width>
-         <height>641</height>
+         <height>638</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_4"/>
@@ -124,7 +131,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="status_bar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -147,8 +154,15 @@
     </property>
     <addaction name="action_edit_backlog"/>
    </widget>
+   <widget class="QMenu" name="menuHilfe">
+    <property name="title">
+     <string>Hilfe</string>
+    </property>
+    <addaction name="actionHilfe"/>
+   </widget>
    <addaction name="menuDatei"/>
    <addaction name="menuMail"/>
+   <addaction name="menuHilfe"/>
   </widget>
   <action name="actionMail_erfassen">
    <property name="text">
@@ -178,6 +192,11 @@
   <action name="action_edit_backlog">
    <property name="text">
     <string>-Datensatz bearbeiten</string>
+   </property>
+  </action>
+  <action name="actionHilfe">
+   <property name="text">
+    <string>Hilfe</string>
    </property>
   </action>
  </widget>
