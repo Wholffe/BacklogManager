@@ -5,6 +5,7 @@ import os
 
 from backlog_manager_edit_dialog import BacklogDialog
 from backlog_manager_add_cat import CategoryDialog
+from backlog_manager_infobox_widget import InfoBoxWidget
 
 from config_handler import fetch_all_categories, fetch_backlogs_from_categories, append_to_backlog_config
 
@@ -52,8 +53,8 @@ class BacklogManager(QMainWindow):
         category_dialog = CategoryDialog()
         category_dialog.exec()
 
-        new_category = category_dialog.new_category_input.text()   # Neue Spiele
-        new_category.lower().replace(" ", "_")                     # neue_spiele
+        new_category = category_dialog.new_category_input.text()
+        new_category.lower().replace(" ", "_")
 
         with open("config/custom_categories.txt", "a+") as file:
             file.write(f"\n{new_category}")
@@ -86,27 +87,24 @@ class BacklogManager(QMainWindow):
         self.action_edit_backlog.triggered.connect(self.edit_backlog)
         self.backlog_collection_table.cellClicked.connect(self.display_backlog_details)
 
-    def display_backlog_details(self, row, column):
+    def display_backlog_details(self, row):
         self.backlog_collection_table.selectRow(row)
-        _title = self.backlog_collection_table.item(row, 1).text()
-        _category = str(self.combobox_category_filter.currentText())
+        title = self.backlog_collection_table.item(row, 1).text() #TODO Check for ID
+        category = str(self.combobox_category_filter.currentText())
 
-        backlog = self.fetch_backlog_by_title_and_category(_title, _category)
-        if backlog:
-            _progress = int(backlog[4])
-            _notes = backlog[5]
+        backlog = self.fetch_backlog_by_title_and_category(title, category)
 
-            scroll_area = self.findChild(QScrollArea, "scrollArea")
-            scroll_area_widget = scroll_area.widget()
-            layout = QVBoxLayout(scroll_area_widget)
+        infobox = InfoBoxWidget()
+        if not backlog:
+            infobox.set_empty()
+        else:
+            progress = int(backlog[4])
+            notes = backlog[5]
 
-            layout.addWidget(QLabel(f"Progress:"))
-            progress_bar = QProgressBar()
-            progress_bar.setValue(_progress)
-            layout.addWidget(progress_bar)
-            layout.addWidget(QLabel(f"Notes:\n {_notes}"))
-
-            scroll_area_widget.setLayout(layout)
+            infobox.set_progress_value(progress)
+            infobox.set_notes(notes)
+        
+        self.scroll_area.setWidget(infobox)
 
     def fetch_backlog_by_title_and_category(self, title, category) -> list:
         path = f"config/{category}.txt"
