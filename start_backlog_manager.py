@@ -72,7 +72,7 @@ class BacklogManager(QMainWindow):
 
     def populate_ui_element_data(self):
         self.combobox_category_filter.addItems(self.categories)
-        self.combobox_column_filter.addItems(['ID', 'Art', 'Beschreibung', 'Status'])
+        self.combobox_column_filter.addItems(['ID', 'Titel', 'Beschreibung', 'Status'])
 
         # initialize the table
         for category in self.categories:
