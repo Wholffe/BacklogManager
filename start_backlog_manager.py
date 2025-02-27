@@ -2,8 +2,8 @@ import sys
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QTableWidgetItem
 
-from backlog_manager_edit_dialog import CreateBacklogDialog
-from backlog_manager_add_cat import CreateCategoryDialog
+from backlog_manager_edit_dialog import BacklogDialog
+from backlog_manager_add_cat import CategoryDialog
 
 from config_handler import fetch_all_categories, fetch_backlogs_from_categories, append_to_backlog_config
 
@@ -21,15 +21,15 @@ class BacklogManager(QMainWindow):
         self.setup_menu_actions()
 
     def add_new_backlog(self):
-        backlog_dialog = CreateBacklogDialog()
+        backlog_dialog = BacklogDialog()
         backlog_dialog.exec()
 
-        _name = backlog_dialog.input_name
-        _type = backlog_dialog.input_type                   # category
-        _description = backlog_dialog.input_description
-        _status = backlog_dialog.input_status
-        _progress = backlog_dialog.input_progress    
-        _notes = backlog_dialog.input_notes
+        _name = backlog_dialog.input_name.text()
+        _type = str(backlog_dialog.input_type.currentText())                   # category
+        _description = str(backlog_dialog.input_description.text())
+        _status = str(backlog_dialog.input_status.currentText())
+        _progress = str(backlog_dialog.input_progress.value())    
+        _notes = backlog_dialog.textedit_notes.toPlainText()
 
         category_name = _type.lower().replace(" ", "_")
         append_to_backlog_config(category_name, [_name, _type, _description, _status, _progress, _notes])
@@ -48,14 +48,14 @@ class BacklogManager(QMainWindow):
 
 
     def add_new_category(self):
-        category_dialog = CreateCategoryDialog()
+        category_dialog = CategoryDialog()
         category_dialog.exec()
 
         new_category = category_dialog.new_category_input.text()   # Neue Spiele
         new_category.lower().replace(" ", "_")                     # neue_spiele
 
         with open('config/custom_categories.txt', 'a+') as file:
-            file.write(new_category)
+            file.write(f'\n{new_category}')
             self.categories.append(new_category)
 
 
@@ -72,6 +72,7 @@ class BacklogManager(QMainWindow):
 
     def populate_ui_element_data(self):
         self.combobox_category_filter.addItems(self.categories)
+        self.combobox_column_filter.addItems(['ID', 'Art', 'Beschreibung', 'Status'])
 
         # initialize the table
         for category in self.categories:

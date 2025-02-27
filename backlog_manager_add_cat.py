@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QDialog
 from PyQt6 import uic
 
-class CreateCategoryDialog(QDialog):
+class CategoryDialog(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi('templates/backlog_manager_add_cat.ui',self)

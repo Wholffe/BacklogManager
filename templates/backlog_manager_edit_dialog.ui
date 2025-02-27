@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>333</width>
+    <width>440</width>
     <height>518</height>
    </rect>
   </property>
@@ -15,12 +15,26 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="4" column="1">
-    <widget class="QComboBox" name="combobox_status"/>
+    <widget class="QComboBox" name="input_status"/>
    </item>
    <item row="6" column="0" colspan="2">
-    <widget class="QTextEdit" name="textEditNotizen">
+    <widget class="QTextEdit" name="textedit_notes">
      <property name="placeholderText">
       <string>Notizen</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_description">
+     <property name="text">
+      <string>Kurzbeschreibung</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_name">
+     <property name="text">
+      <string>Titel</string>
      </property>
     </widget>
    </item>
@@ -31,19 +45,11 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_kurzbeschreibung">
-     <property name="text">
-      <string>Kurzbeschreibung</string>
-     </property>
-    </widget>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="input_description"/>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label_titel">
-     <property name="text">
-      <string>Titel</string>
-     </property>
-    </widget>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="input_name"/>
    </item>
    <item row="7" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -55,33 +61,27 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="lineedit_kurzbeschreibung"/>
-   </item>
-   <item row="5" column="1">
-    <widget class="QSpinBox" name="spinbox_fortschritt">
-     <property name="maximum">
-      <number>100</number>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLineEdit" name="lineedit_titel"/>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_fortschritt">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_type">
      <property name="text">
-      <string>Fortschritt in %</string>
+      <string>Kathegorie</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QComboBox" name="combobox_kathegorie"/>
+    <widget class="QComboBox" name="input_type"/>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_kathegorie">
+   <item row="5" column="1">
+    <widget class="QSlider" name="input_progress">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_progress">
      <property name="text">
-      <string>Kathegorie</string>
+      <string>Fortschritt in %</string>
      </property>
     </widget>
    </item>
