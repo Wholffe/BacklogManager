@@ -1,13 +1,13 @@
 import sys
 from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QTableWidgetItem, QLabel, QVBoxLayout, QScrollArea, QProgressBar
+from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView
 import os
 
 from backlog_manager_edit_dialog import BacklogDialog
 from backlog_manager_add_cat import CategoryDialog
 from backlog_manager_infobox_widget import InfoBoxWidget
 
-from config_handler import fetch_all_categories, fetch_backlogs_from_categories, append_to_backlog_config
+from config_handler import fetch_all_categories, fetch_backlogs_from_categories, append_to_backlog_config, fetch_backlog_by_title_and_category
 
 
 class BacklogManager(QMainWindow):
@@ -54,13 +54,17 @@ class BacklogManager(QMainWindow):
         new_category = category_dialog.new_category_input.text()
         new_category.lower().replace(" ", "_")
 
-        with open("config/custom_categories.txt", "a+") as file:
+        with open("config/custom_categories.txt", "a+", encoding='utf-8') as file:
             file.write(f"\n{new_category}")
             self.categories.append(new_category)
 
 
     def align_table_headers(self):
-        pass
+        header = self.backlog_collection_table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
 
     def edit_backlog(self):
         pass
@@ -90,7 +94,7 @@ class BacklogManager(QMainWindow):
         title = self.backlog_collection_table.item(row, 1).text() #TODO Check for ID
         category = str(self.combobox_category_filter.currentText())
 
-        backlog = self.fetch_backlog_by_title_and_category(title, category)
+        backlog = fetch_backlog_by_title_and_category(title, category)
 
         infobox = InfoBoxWidget()
         if not backlog:
@@ -103,18 +107,6 @@ class BacklogManager(QMainWindow):
             infobox.set_notes(notes)
         
         self.scroll_area.setWidget(infobox)
-
-    def fetch_backlog_by_title_and_category(self, title, category) -> list:
-        path = f"config/{category}.txt"
-        if not os.path.exists(path):
-            return None
-
-        with open(path, "r") as file:
-            for line in file:
-                backlog = line.strip().split(";")
-                if backlog[0] == title:
-                    return backlog
-        return None
 
 
 app = QApplication(sys.argv)

@@ -2,7 +2,7 @@ import os
 
 
 def append_to_backlog_config(config_file, backlog):
-    with open(f'config/{config_file}.txt', 'a+') as file:
+    with open(f'config/{config_file}.txt', 'a+', encoding='utf-8') as file:
         csv_string = ';'.join(backlog)
         file.write(f'{csv_string}\n')
 
@@ -30,7 +30,7 @@ def fetch_backlogs_from_file(path):
         print("The provided path does not exist.")        
         return []
 
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding='utf-8') as file:
         for line in file:
             backlogs.append(line.strip().split(';'))
 
@@ -44,7 +44,7 @@ def fetch_categories_from_file(path):
         print("The provided path does not exist.")        
         return []
 
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding='utf-8') as file:
         for line in file:
             categories.append(line.strip())
 
@@ -55,3 +55,15 @@ def fetch_custom_categories():
 
 def fetch_predefined_categories():
     return fetch_categories_from_file('config/categories.txt')
+
+def fetch_backlog_by_title_and_category(title, category) -> list:
+    path = f"config/{category}.txt"
+    if not os.path.exists(path):
+        return None
+
+    with open(path, "r", encoding='utf-8') as file:
+        for line in file:
+            backlog = line.strip().split(";")
+            if backlog[0] == title:
+                return backlog
+    return None

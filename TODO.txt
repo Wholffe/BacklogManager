@@ -1,7 +1,9 @@
 refresh beim anlegen von datensätzen
 bearbeiten von datensätzen
 custom categories entfernen --> übernimmt sowieso schon categories
+id's für datensätze
 
 hilfe ui hinzufügen
 status_bar updaten
 font etc absprechen
+kategorie wieder entfernen
