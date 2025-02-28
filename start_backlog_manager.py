@@ -21,6 +21,7 @@ class BacklogManager(QMainWindow):
 
         self.align_table_headers()
         self.setup_menu_actions()
+        self.setup_filter_actions()
 
     def add_new_backlog(self):
         backlog_dialog = BacklogDialog()
@@ -69,10 +70,38 @@ class BacklogManager(QMainWindow):
     def edit_backlog(self):
         pass
 
+    def filter_backlogs(self):
+        selected_column = self.combobox_column_filter.text()
+        selected_categories = self.combobox_category_filter.text()
+
+        if selected_categories == "Alle":
+            selected_categories = self.categories
+
+        filtered_backlogs = []
+        for category in selected_categories:
+            csv_backlogs = fetch_backlogs_from_categories(category)
+            for entry in csv_backlogs:
+                backlog = entry.split(";")
+
+                _category = backlog[1]
+                if _category != category:
+                    continue
+
+                column_filter = {
+                    "Titel": backlog[0],
+                    "Beschreibung": backlog[2],
+                    "Status": backlog[3]
+                }
+
+                cell_value = column_filter[selected_column]
+                if self.lineedit_column_filter.text() in cell_value:
+                    filtered_backlogs.append(backlog)
+
+
     def initialize_program_data(self):
         # read in categories
-        self.categories = fetch_all_categories()
-        self.backlogs = fetch_backlogs_from_categories(self.categories)
+        self.categories = ["Alle", *fetch_all_categories()]
+        self.backlogs = fetch_backlogs_from_categories(fetch_all_categories())
 
     def populate_ui_element_data(self):
         self.combobox_category_filter.addItems(self.categories)
@@ -82,6 +111,9 @@ class BacklogManager(QMainWindow):
         for category in self.categories:
             for i, backlog in enumerate(self.backlogs[category]):
                 self.add_new_backlog_row(backlog)
+
+    def setup_filter_actions(self):
+        self.button_apply_filter.clicked.connect(self.filter_backlogs)
 
     def setup_menu_actions(self):
         self.action_new_backlog.triggered.connect(self.add_new_backlog)
@@ -107,6 +139,7 @@ class BacklogManager(QMainWindow):
             infobox.set_notes(notes)
         
         self.scroll_area.setWidget(infobox)
+        self.status_bar.showMessage(f'Aktueller Datensatz: {title}')
 
 
 app = QApplication(sys.argv)
