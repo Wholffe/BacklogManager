@@ -17,9 +17,6 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="3" column="0">
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="2" column="0">
-       <widget class="QComboBox" name="combobox_column_filter"/>
-      </item>
       <item row="2" column="1">
        <widget class="QLineEdit" name="lineedit_column_filter">
         <property name="placeholderText">
@@ -27,17 +24,39 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="2">
+      <item row="2" column="0">
+       <widget class="QComboBox" name="combobox_column_filter"/>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Filter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
        <widget class="QComboBox" name="combobox_category_filter">
         <property name="currentIndex">
          <number>-1</number>
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
-       <widget class="QPushButton" name="button_apply_filter">
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
-         <string>Filter Anwenden</string>
+         <string>Nach Kategorie filtern</string>
         </property>
        </widget>
       </item>
@@ -54,16 +73,14 @@
       <property name="autoScrollMargin">
        <number>16</number>
       </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
       <row>
        <property name="text">
         <string>1</string>
        </property>
       </row>
-      <column>
-       <property name="text">
-        <string>ID</string>
-       </property>
-      </column>
       <column>
        <property name="text">
         <string>Titel</string>
@@ -81,20 +98,15 @@
       </column>
       <item row="0" column="0">
        <property name="text">
-        <string>1</string>
+        <string>Star Wars: Episode III</string>
        </property>
       </item>
       <item row="0" column="1">
        <property name="text">
-        <string>Star Wars: Episode III</string>
-       </property>
-      </item>
-      <item row="0" column="2">
-       <property name="text">
         <string>Die Rache der Sith</string>
        </property>
       </item>
-      <item row="0" column="3">
+      <item row="0" column="2">
        <property name="text">
         <string>Erledigt</string>
        </property>
@@ -111,8 +123,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>342</width>
-         <height>638</height>
+         <width>337</width>
+         <height>540</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_4"/>
@@ -132,6 +144,13 @@
       </property>
      </widget>
     </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="button_apply_filter">
+      <property name="text">
+       <string>Filter Anwenden</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="status_bar"/>
@@ -141,7 +160,7 @@
      <x>0</x>
      <y>0</y>
      <width>1018</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
